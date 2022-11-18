@@ -18,6 +18,7 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
   const proposerTx = await timeLock.grantRole(proposerRole, governor.address)
   await proposerTx.wait(1)
 
+  //anyone can execute - but we'll try to execute using chainlink keepers (automators)
   const executorTx = await timeLock.grantRole(executorRole, ADDRESS_ZERO)
   await executorTx.wait(1)
 
