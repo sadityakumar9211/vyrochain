@@ -9,17 +9,19 @@ pragma solidity ^0.8.7;
 
 //imports
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 import {DoctorType} from "./DoctorType.sol";
 import {HospitalType} from "./HospitalType.sol";
 import {PatientType} from "./PatientType.sol";
 
 //errors
 error PatientMedicalRecords__NotOwner();
+error PatientMedicalRecords__NotChairperson();
 error PatientMedicalRecords__NotDoctor();
 error PatientMedicalRecords__NotApproved();
 error PatientMedicalRecords__NotPatient();
 
-contract PatientMedicalRecordSystem is ReentrancyGuard {
+contract PatientMedicalRecordSystem is ReentrancyGuard, Ownable {
     //Type Declaration
 
     //Storage Variables
@@ -28,7 +30,8 @@ contract PatientMedicalRecordSystem is ReentrancyGuard {
     mapping(address => HospitalType.Hospital) private s_hospitals;
     mapping(address => string) private s_addressToPublicKey;
 
-    address private immutable i_owner;
+    address private s_owner;
+    address private s_chairperson;
 
     //Events
     event AddedPatient(
@@ -63,11 +66,12 @@ contract PatientMedicalRecordSystem is ReentrancyGuard {
         string email,
         string phoneNumber
     ); //added(mostly) or modified
+    event chairpersonChanged(address newChainperson, address oldChainperson);
 
     //modifiers
-    modifier onlyOwner() {
-        if (msg.sender != i_owner) {
-            revert PatientMedicalRecords__NotOwner();
+    modifier onlyChairperson() {
+        if (msg.sender != s_chairperson) {
+            revert PatientMedicalRecords__NotChairperson();
         }
         _;
     }
@@ -79,11 +83,19 @@ contract PatientMedicalRecordSystem is ReentrancyGuard {
         _;
     }
 
+
     constructor() {
-        i_owner = msg.sender;
+        s_owner = msg.sender;
+        s_chairperson = msg.sender;
     }
 
     //Functions
+    //function change chairperson
+    function changeChairperson (address _chairperson) external onlyOwner {
+        address oldChairperson = s_chairperson;
+        s_chairperson = _chairperson;
+        emit chairpersonChanged(_chairperson, oldChairperson);
+    }
     //patients can themselves register to the system.
     function registerPatient(
         address _patientAddress,
@@ -161,7 +173,7 @@ contract PatientMedicalRecordSystem is ReentrancyGuard {
         );
     }
 
-    //this will be done using script by the owner
+    //this will be done only by the chairperson
     function addDoctorDetails(
         address _doctorAddress,
         string memory _name,
@@ -169,7 +181,7 @@ contract PatientMedicalRecordSystem is ReentrancyGuard {
         uint256 _dateOfRegistration,
         string memory _specialization,
         address _hospitalAddress
-    ) external onlyOwner nonReentrant {
+    ) external onlyChairperson nonReentrant {
         DoctorType.Doctor memory doctor;
         doctor.name = _name;
         doctor.doctorRegistrationId = _doctorRegistrationId;
@@ -189,14 +201,14 @@ contract PatientMedicalRecordSystem is ReentrancyGuard {
         );
     }
 
-    //this will be done using script by the owner
+    //this will be done only by the owner
     function addHospitalDetails(
         address _hospitalAddress,
         string memory _name,
         string memory _hospitalRegistrationId,
         string memory _email,
         string memory _phoneNumber
-    ) external onlyOwner nonReentrant {
+    ) external onlyChairperson nonReentrant {
         HospitalType.Hospital memory hospital = s_hospitals[_hospitalAddress];
         hospital.hospitalAddress = _hospitalAddress;
         hospital.name = _name;
@@ -276,6 +288,9 @@ contract PatientMedicalRecordSystem is ReentrancyGuard {
     }
 
     function getOwner() external view returns (address) {
-        return i_owner;
+        return s_owner;
+    }
+    function getChairperson () external view returns (address) {
+        return s_chairperson;
     }
 }
