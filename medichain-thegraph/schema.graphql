@@ -1,0 +1,40 @@
+type AddedPatient @entity {
+  id: ID!
+  name: String!
+  patientAddress: Bytes!
+  dob: BigInt!
+  phoneNumber: String
+  bloodGroup: String!
+  dateOfRegistration: BigInt!
+  vaccinationHash: [String!]
+  accidentHash: [String!]
+  chronicHash: [String!]
+  acuteHash: [String!]
+  publicKey: String!
+}
+
+type AddedDoctor @entity{
+  id: ID!
+  name: String!
+  doctorAddress: Bytes!
+  dateOfRegistration: BigInt!
+  specialization: String!
+  doctorRegistrationId: String!
+  hospitalAddress: Bytes
+}
+
+type AddedHospital @entity{
+  id: ID!
+  name: String!
+  hospitalAddress: Bytes!
+  dateOfRegistration: BigInt!      # currently nullable for now.
+  hospitalRegistrationId: String!
+  email: String
+  phoneNumber: String
+}
+
+type AddedPublicKey @entity{
+  id: ID!
+  patientAddress: Bytes!
+  publicKey: String!
+}

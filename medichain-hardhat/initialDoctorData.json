@@ -1,0 +1,10 @@
+[
+    {
+        "doctorAddress": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+        "name": "Anand Prakash",
+        "doctorRegistrationId": "doc1R",
+        "dateOfRegistration": "1659827384",
+        "specialization": "Internal Medicine",
+        "hospitalAddress": "0x0f44c4f5C4ea80577Fe0e2Fa9553925A153EAf5E"
+    }
+]
