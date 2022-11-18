@@ -22,10 +22,10 @@ const POLYGON_MAINNET_RPC_URL =
 const GOERLI_RPC_URL =
     process.env.GOERLI_RPC_URL || "https://eth-goerli.alchemyapi.io/v2/your-api-key"
 
-const OWNER_PRIVATE_KEY = process.env.OWNER_PRIVATE_KEY || "0x"
-const HOSPITAL_PRIVATE_KEY = process.env.HOSPITAL_PRIVATE_KEY || "0x"
-const DOCTOR_PRIVATE_KEY = process.env.DOCTOR_PRIVATE_KEY || "0x"
-const PATIENT_PRIVATE_KEY = process.env.PATIENT_PRIVATE_KEY || "0x"
+const OWNER_PRIVATE_KEY = process.env.OWNER_PRIVATE_KEY || "0x0000000000000000000000000000000000000000"
+const HOSPITAL_PRIVATE_KEY = process.env.HOSPITAL_PRIVATE_KEY || "0x0000000000000000000000000000000000000000"
+const DOCTOR_PRIVATE_KEY = process.env.DOCTOR_PRIVATE_KEY || "0x0000000000000000000000000000000000000000"
+const PATIENT_PRIVATE_KEY = process.env.PATIENT_PRIVATE_KEY || "0x0000000000000000000000000000000000000000"
 
 // optional
 const MNEMONIC = process.env.MNEMONIC || "your mnemonic"
@@ -183,6 +183,12 @@ module.exports = {
         compilers: [
             {
                 version: "0.8.7",
+                settings: {
+                    optimizer: {
+                      enabled: true,
+                      runs: 200
+                    }
+                }
             },
         ],
     },
