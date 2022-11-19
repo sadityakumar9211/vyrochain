@@ -1,6 +1,6 @@
 //Configurations for deployment on various networks --> values of vrfCoordinatorV2 changes on
 //various networks
-
+const path = require('path');
 const { ethers } = require("ethers")
 
 //all the parameters that are different chain-to-chain.
@@ -9,11 +9,15 @@ const networkConfig = {
     //     name: "rinkeby",
     //     waitConfirmations: 6,
     // },
-    31337: {
+    localhost: {
+        name: "localhost",
+        waitConfirmations: 1,
+    },
+    hardhat: {
         name: "hardhat",
         waitConfirmations: 1,
     },
-    5: {
+    goerli: {
         name: "goerli",
         waitConfirmations: 6,
     }
@@ -44,7 +48,7 @@ module.exports = {
     networkConfig,
     developmentChains,
     CATEGORY,
-    IPFS_HASH,
+    // IPFS_HASH,
     VERIFICATION_BLOCK_CONFIRMATIONS,
     QUORUM_PERCENTAGE,
     MIN_DELAY,

@@ -9,6 +9,7 @@ require("dotenv").config()
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
+const {ADDRESS_ZERO} = require("./helper-hardhat-config")
 
 const MAINNET_RPC_URL =
     process.env.MAINNET_RPC_URL ||
@@ -22,10 +23,10 @@ const POLYGON_MAINNET_RPC_URL =
 const GOERLI_RPC_URL =
     process.env.GOERLI_RPC_URL || "https://eth-goerli.alchemyapi.io/v2/your-api-key"
 
-const OWNER_PRIVATE_KEY = process.env.OWNER_PRIVATE_KEY || "0x0000000000000000000000000000000000000000"
-const HOSPITAL_PRIVATE_KEY = process.env.HOSPITAL_PRIVATE_KEY || "0x0000000000000000000000000000000000000000"
-const DOCTOR_PRIVATE_KEY = process.env.DOCTOR_PRIVATE_KEY || "0x0000000000000000000000000000000000000000"
-const PATIENT_PRIVATE_KEY = process.env.PATIENT_PRIVATE_KEY || "0x0000000000000000000000000000000000000000"
+const OWNER_PRIVATE_KEY = process.env.OWNER_PRIVATE_KEY || ADDRESS_ZERO
+const HOSPITAL_PRIVATE_KEY = process.env.HOSPITAL_PRIVATE_KEY || ADDRESS_ZERO
+const DOCTOR_PRIVATE_KEY = process.env.DOCTOR_PRIVATE_KEY || ADDRESS_ZERO
+const PATIENT_PRIVATE_KEY = process.env.PATIENT_PRIVATE_KEY || ADDRESS_ZERO
 
 // optional
 const MNEMONIC = process.env.MNEMONIC || "your mnemonic"

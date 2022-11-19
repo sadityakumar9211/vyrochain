@@ -2,8 +2,8 @@ const { ethers, network } = require("hardhat")
 const fs = require("fs")
 
 const frontEndContractsFile =
-    "../summer-project-nextjs/constants/networkMapping.json"
-const frontEndAbiLocation = "../summer-project-nextjs/constants/"
+    "../medichain-nextjs/constants/networkMapping.json"
+const frontEndAbiLocation = "../medichain-nextjs/constants/"
 
 module.exports = async function () {
     if (process.env.UPDATE_FRONT_END == "true") {
