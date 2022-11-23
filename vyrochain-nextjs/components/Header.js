@@ -10,7 +10,7 @@ export default function Header() {
                         {/* We have a SVG here */}
                         <img src="/logo.svg" alt="Logo of MediChain" />
                         <span className="ml-3 text-xl text-gray-800">
-                            MediChain
+                            VyroChain
                             <span className="text-pink-500">.</span>
                         </span>
                     </a>
@@ -27,7 +27,7 @@ export default function Header() {
                     </Link>
                     <Link href="/#features">
                         <a className="mr-0 font-bold duration-100 md:mr-3 lg:mr-8 transition-color hover:text-indigo-600">
-                            Features
+                            Proposals
                         </a>
                     </Link>
                     <Link href="/hospitalDashboard">

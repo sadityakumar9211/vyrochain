@@ -10,7 +10,7 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
 
   log('----------------------------------------')
   log('Deploying Time Lock........')
-  const timeLock = await deploy('TimeLock', {
+  const timeLock = await deploy('TimelockControl', {
     from: deployer,
     args: [MIN_DELAY, [], []],
     log: true,

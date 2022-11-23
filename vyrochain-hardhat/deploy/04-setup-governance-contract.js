@@ -7,7 +7,7 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
   const { deployer } = await getNamedAccounts()
   const { deploy, log, get } = deployments
 
-  const timeLock = await ethers.getContract('TimeLock', deployer)
+  const timeLock = await ethers.getContract('TimelockControl', deployer)
   const governor = await ethers.getContract('GovernorContract', deployer)
 
   log('Setting up the roles...')

@@ -14,7 +14,7 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
   const { deploy, log, get } = deployments
 
   const governanceToken = await get('GovernanceToken')
-  const timeLock = await get('TimeLock')
+  const timeLock = await get('TimelockControl')
   const args = [
     governanceToken.address,
     timeLock.address,

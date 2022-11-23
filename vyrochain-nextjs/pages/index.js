@@ -8,7 +8,7 @@ export default function Home() {
     return (
         <div>
             <Head>
-                <title>MediChain - Homepage</title>
+                <title>VyroChain - Homepage</title>
                 <meta name="description" content="MediChain - Homepage" />
                 <link rel="icon" href="/logo.svg" />
             </Head>
