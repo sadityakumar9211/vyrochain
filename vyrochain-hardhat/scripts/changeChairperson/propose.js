@@ -3,16 +3,16 @@ const { readFileSync, writeFileSync } = require("fs")
 // @ts-ignore
 const { ethers, network } = require("hardhat")
 const {
-    NEW_Chairperson_INFO,
+    NEW_CHAIRPERSON_INFO,
     FUNC,
     PROPOSAL_DESCRIPTION,
     developmentChains,
     VOTING_DELAY,
     PROPOSALS_FILE,
-} = require("../helper-hardhat-config")
-import { moveBlocks } from "../utils/move-blocks"
+} = require("../../helper-hardhat-config")
+const { moveBlocks } = require("../../utils/move-blocks")
 
-module.exports = async function propose(args, functionToCall, proposalDescription) {
+async function propose(args, functionToCall, proposalDescription) {
     const governor = await ethers.getContract("GovernorContract")
     const patientMedicalRecordSystem = await ethers.getContract("PatientMedicalRecordSystem")
     const encodedFunctionCall = patientMedicalRecordSystem.interface.encodeFunctionData(
@@ -49,9 +49,11 @@ module.exports = async function propose(args, functionToCall, proposalDescriptio
     writeFileSync(PROPOSALS_FILE, JSON.stringify(proposals))
 }
 
-propose([NEW_Chairperson_INFO.address], FUNC, PROPOSAL_DESCRIPTION)
+propose([NEW_CHAIRPERSON_INFO.address], FUNC, PROPOSAL_DESCRIPTION)
     .then(() => (process.exitCode = 0))
     .catch((e) => {
         console.log(e)
         process.exitCode = 1
     })
+
+module.exports = { propose }

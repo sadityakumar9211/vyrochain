@@ -1,12 +1,6 @@
 const { network } = require("hardhat")
+const {moveTime} = require("./move-time")
 
-//This is how we sleep in JS
-function sleep(timeInMs){
-    //in order to wait for some time we have to use promises
-    return new Promise((resolve)=>{
-        setTimeout(resolve, timeInMs)
-    })
-}
 
 async function moveBlocks(amount, sleepAmount=0){
      console.log("Moving Blocks...")
@@ -17,9 +11,9 @@ async function moveBlocks(amount, sleepAmount=0){
         })
         if(sleepAmount > 0){
             console.log(`Sleeping for ${sleepAmount}ms`)
-            await sleep(sleepAmount)
+            await moveTime(sleepAmount)
         }
      }
 }
 
-module.exports = { moveBlocks, sleep } 
+module.exports = { moveBlocks} 

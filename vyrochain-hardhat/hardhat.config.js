@@ -9,7 +9,7 @@ require("dotenv").config()
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
-const {ADDRESS_ZERO} = require("./helper-hardhat-config")
+const { ADDRESS_ZERO } = require("./helper-hardhat-config")
 
 const MAINNET_RPC_URL =
     process.env.MAINNET_RPC_URL ||
@@ -34,7 +34,8 @@ const MNEMONIC = process.env.MNEMONIC || "your mnemonic"
 // Your API key for Etherscan, obtain one at https://etherscan.io/
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || "Your etherscan API key"
 const POLYGONSCAN_API_KEY = process.env.POLYGONSCAN_API_KEY || "Your polygonscan API key"
-const REPORT_GAS = process.env.REPORT_GAS || false
+// const REPORT_GAS = process.env.REPORT_GAS || false
+const REPORT_GAS = false
 
 module.exports = {
     defaultNetwork: "hardhat",
@@ -155,7 +156,7 @@ module.exports = {
         },
     },
     gasReporter: {
-        enabled: REPORT_GAS,
+        enabled: false,
         currency: "USD",
         outputFile: "gas-report.txt",
         noColors: true,
@@ -186,10 +187,10 @@ module.exports = {
                 version: "0.8.7",
                 settings: {
                     optimizer: {
-                      enabled: true,
-                      runs: 200
-                    }
-                }
+                        enabled: true,
+                        runs: 200,
+                    },
+                },
             },
         ],
     },

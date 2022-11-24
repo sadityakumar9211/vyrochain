@@ -24,5 +24,5 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
     await verify(timeLock.address, [])
   }
 
-  log(`Deployed Governance token at address ${timeLock.address}`)
+  log(`Deployed TimelockControl at address ${timeLock.address}`)
 }

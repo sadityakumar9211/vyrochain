@@ -42,7 +42,7 @@ contract TimelockController is AccessControl, IERC721Receiver, IERC1155Receiver,
 
     bytes32[] listOfIds; //list of ids of proposals
     mapping(bytes32 => uint256) private _timestamps;
-    mapping(bytes32 => passedProposalsType) private scheduledProposals;
+    mapping(bytes32 => passedProposalsType) private _scheduledProposals;
     uint256 private _minDelay;
 
     /**
@@ -246,7 +246,7 @@ contract TimelockController is AccessControl, IERC721Receiver, IERC1155Receiver,
         uint256 delay
     ) public virtual onlyRole(PROPOSER_ROLE) {
         bytes32 id = hashOperation(target, value, data, predecessor, salt);
-        scheduledProposals[id] = (
+        _scheduledProposals[id] = (
             passedProposalsType({
                 target: target,
                 value: value,
@@ -360,11 +360,11 @@ contract TimelockController is AccessControl, IERC721Receiver, IERC1155Receiver,
         //executing the proposal with returned Id in performData
         bytes32 id = bytes32(performData[:32]); //bytes to bytes32 conversion --> supported for solidity version >= v0.8.5
         execute(
-            scheduledProposals[id].target,
-            scheduledProposals[id].value,
-            scheduledProposals[id].payload,
-            scheduledProposals[id].predecessor,
-            scheduledProposals[id].salt
+            _scheduledProposals[id].target,
+            _scheduledProposals[id].value,
+            _scheduledProposals[id].payload,
+            _scheduledProposals[id].predecessor,
+            _scheduledProposals[id].salt
         );
     }
 
